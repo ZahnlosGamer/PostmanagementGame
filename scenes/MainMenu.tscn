@@ -1,0 +1,96 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource path="res://scripts/MainMenu.gd" type="Script" id=1]
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource(1)
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.058824, 0.086275, 0.117647, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_left = 0.2
+anchor_top = 0.1
+anchor_right = 0.8
+anchor_bottom = 0.9
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 0.0
+margin_bottom = 0.0
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 40.0
+margin_top = 40.0
+margin_right = -40.0
+margin_bottom = -40.0
+custom_constants/separation = 24
+
+[node name="Title" type="Label" parent="MarginContainer/VBox"]
+text = "Postmanagement Game"
+margin_bottom = 50.0
+horizontal_alignment = 1
+add_theme_font_size_override("font_size", 36)
+
+[node name="Subtitle" type="Label" parent="MarginContainer/VBox"]
+text = "Gründe deine eigene Zustellfirma"
+horizontal_alignment = 1
+add_theme_font_size_override("font_size", 20)
+
+[node name="NameRow" type="HBoxContainer" parent="MarginContainer/VBox"]
+size_flags_horizontal = 3
+custom_constants/separation = 16
+
+[node name="NameLabel" type="Label" parent="MarginContainer/VBox/NameRow"]
+text = "Firmenname:"
+size_flags_vertical = 1
+
+[node name="CompanyNameInput" type="LineEdit" parent="MarginContainer/VBox/NameRow"]
+unique_name_in_owner = true
+size_flags_horizontal = 3
+placeholder_text = "z.B. BlitzPost GmbH"
+
+[node name="LogoRow" type="HBoxContainer" parent="MarginContainer/VBox"]
+size_flags_horizontal = 3
+custom_constants/separation = 24
+
+[node name="LogoPreview" type="ColorRect" parent="MarginContainer/VBox/LogoRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 140)
+color = Color(0.9, 0.6, 0.2, 1)
+
+[node name="ColorPicker" type="ColorPickerButton" parent="MarginContainer/VBox/LogoRow"]
+unique_name_in_owner = true
+text = "Logo-Farbe"
+size_flags_vertical = 1
+
+[node name="Buttons" type="HBoxContainer" parent="MarginContainer/VBox"]
+size_flags_horizontal = 3
+custom_constants/separation = 16
+
+[node name="StartButton" type="Button" parent="MarginContainer/VBox/Buttons"]
+unique_name_in_owner = true
+text = "Spiel Starten"
+size_flags_horizontal = 3
+
+[node name="InfoButton" type="Button" parent="MarginContainer/VBox/Buttons"]
+text = "Info"
+size_flags_horizontal = 1
+
+[node name="ExitButton" type="Button" parent="MarginContainer/VBox/Buttons"]
+text = "Beenden"
+size_flags_horizontal = 1
+
+[node name="InfoDialog" type="AcceptDialog" parent="."]
+unique_name_in_owner = true
+window_title = "Hinweis"
+
+[connection signal="pressed" from="MarginContainer/VBox/Buttons/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBox/Buttons/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBox/Buttons/InfoButton" to="." method="_on_info_button_pressed"]
+[connection signal="color_changed" from="MarginContainer/VBox/LogoRow/ColorPicker" to="." method="_on_color_picker_color_changed"]
